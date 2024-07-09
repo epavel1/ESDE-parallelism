@@ -5,8 +5,10 @@ def main(rank, size):
     array_length = 10000000
     local_partial_array = array_length // size
     
-    # TODO: sum partial arrays HERE and return total_sum with total sum
+    local_sum = sum(i * 0.001 for i in range(rank * local_partial_array, (rank + 1) * local_partial_array))
  
+    total_sum = comm.reduce(local_sum, op=MPI.SUM, root=0)
+
     return total_sum
         
 if __name__ == "__main__":

@@ -28,7 +28,14 @@ def sum_values(v, a):
 
     cuda.syncthreads()
 
-    # TODO: Perform parallel reduction in shared memory
+    # Perform parallel reduction in shared memory
+    stride = 1
+    while stride < cuda.blockDim.x:
+        index = 2 * stride * tid
+        if index < cuda.blockDim.x:
+            shared[index] += shared[index + stride]
+        cuda.syncthreads()
+        stride *= 2
 
     if tid == 0:
         a[cuda.blockIdx.x] = shared[0]
@@ -62,8 +69,15 @@ def main():
     else:
         a = None
 
-    # TODO: Use MPI to scatter the array to all processes and sum the values into total_Sum
-    # Hint: Use Task2 and Task3 for reference 
+    comm.Scatter([a, MPI.FLOAT], [a_partial, MPI.FLOAT], root=0)
+
+    sum_values[grid, block](a_partial, partial_sum)
+    
+    local_sum = cupy.sum(partial_sum)
+ 
+    total_sum = cupy.zeros(1, dtype=cupy.float32)
+        
+    comm.Reduce(local_sum, total_sum, op=MPI.SUM, root=0)
     
     proc_info = comm.gather((my_rank, partial_sum,a_partial), root=0)
     if my_rank == 0:

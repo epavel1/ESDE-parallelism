@@ -36,8 +36,16 @@ def train(rank, world_size):
     
     for epoch in range(10):
         # Training phase
-        # TODO: Implement the training phase during training HERE
-
+        ddp_model.train()
+        for batch in train_loader:
+            x, y = batch
+            x, y = x.to(rank), y.to(rank)
+            optimizer.zero_grad()
+            outputs = ddp_model(x)
+            loss = F.cross_entropy(outputs, y)
+            loss.backward()
+            optimizer.step()
+            
         # Validation phase
         ddp_model.eval()
         val_loss = 0.0

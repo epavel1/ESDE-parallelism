@@ -12,8 +12,10 @@ def main():
     num_workers = 64
     chunk_size = n // num_workers #156250
     ranges = [(i * chunk_size, (i + 1) * chunk_size) for i in range(num_workers)]
- 
-    # TODO: sum arrays with 64 worker threads HERE and return total_sum with total sum
+
+    with Pool(num_workers) as pool:
+        results = pool.starmap(compute_sum, ranges)
+    total_sum = sum(results)
     
     return total_sum
    

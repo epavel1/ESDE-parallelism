@@ -5,8 +5,8 @@
 #SBATCH --cpus-per-task=64          # Number of CPU cores per task
 #SBATCH --gres=gpu:4                # Number of GPUs
 #SBATCH --account=deepacf           # Account name
-#SBATCH --output=job_output_%j.log  # Output file (%j is replaced by the job ID)
-#SBATCH --error=job_error_%j.log    # Error file (%j is replaced by the job ID)
+#SBATCH --output=job_output_task1_%j.log  # Output file (%j is replaced by the job ID)
+#SBATCH --error=job_error_task1_%j.log    # Error file (%j is replaced by the job ID)
 #SBATCH --time=00:30:00             # Time limit of 30 minutes
 
 # Run the task

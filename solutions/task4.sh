@@ -3,11 +3,10 @@
 #SBATCH --partition=develbooster    # Partition name
 #SBATCH --ntasks=4                  # Number of tasks (MPI ranks)
 #SBATCH --cpus-per-task=64          # Number of CPU cores per task
-#SBATCH --gres=gpu:4                # Number of GPUs
 #SBATCH --account=deepacf           # Account name
-#SBATCH --output=job_output_%j.log  # Output file (%j is replaced by the job ID)
-#SBATCH --error=job_error_%j.log    # Error file (%j is replaced by the job ID)
-#SBATCH --time=00:30:00             # Time limit of 30 minutes since it is shared memory on 4 GPUs
+#SBATCH --output=job_output_task4_%j.log   # Output file (%j is replaced by the job ID)
+#SBATCH --error=job_error_task4_%j.log     # Error file (%j is replaced by the job ID)
+#SBATCH --time=00:30:00             # Time limit of 30 minutes
 
 # Set CUDA_VISIBLE_DEVICES environment variable
 export CUDA_VISIBLE_DEVICES=0,1,2,3

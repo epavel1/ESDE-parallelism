@@ -18,7 +18,13 @@ def parallel_sum(arr, result):
 
     cuda.syncthreads()
 
-    #TODO: Perform parallel reduction HERE and synchronize the result back
+    stride = 1
+    while stride < cuda.blockDim.x:
+        index = 2 * stride * tid
+        if index < cuda.blockDim.x:
+            sdata[index] += sdata[index + stride]
+        cuda.syncthreads()
+        stride *= 2
 
     if tid == 0:
         result[cuda.blockIdx.x] = sdata[0]
