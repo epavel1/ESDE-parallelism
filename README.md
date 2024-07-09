@@ -47,25 +47,25 @@ The repository is organized as follows:
 ## Instructions
 
 1. **Clone the Repository**:
-  ```sh
-  git clone https://github.com/epavel1/ESDE-parallelism.git
-  cd ESDE-parallelism
-  ```
+```sh
+git clone https://github.com/epavel1/ESDE-parallelism.git
+cd ESDE-parallelism
+```
 
 2. **Setting up the Environment**:
 Navigate to /env directory and source the environment.sh file.
-  ```sh
-  cd env/
-  source environment.sh
-  ```
+```sh
+cd env/
+source environment.sh
+```
 
 3. **Navigate to the Tasks**:
 Each task's Python script and corresponding job script are located in the /tasks directory.
 
 4. **Complete the Tasks**:
 Open each taskX.py file and fill in the missing code. Use the corresponding taskX.sh script to submit the job and test your solution.
-    ```sh
-  sbatch taskX.sh
-  ```
+```sh
+sbatch taskX.sh
+```
 
 
