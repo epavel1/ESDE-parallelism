@@ -45,7 +45,6 @@ def main():
     my_rank = comm.Get_rank()
     number_of_ranks = comm.Get_size()
     number_of_gpus_per_node = len(cuda.gpus)
-    print(f"Rank {number_of_ranks} on {number_of_gpus_per_node}")
     device_id = my_rank % number_of_gpus_per_node
     cuda.select_device(device_id)
     gpu_info = comm.gather((my_rank, device_id), root=0)
@@ -79,10 +78,12 @@ def main():
         
     comm.Reduce(local_sum, total_sum, op=MPI.SUM, root=0)
     
-    proc_info = comm.gather((my_rank, partial_sum,a_partial), root=0)
-    if my_rank == 0:
-        for rank_proc,psum,part in proc_info:
-            print(f"Rank {rank_proc}/{number_of_ranks} for array {part.size}/{a.size} partial sum {psum}")
+    # Debug information
+    # proc_info = comm.gather((my_rank, partial_sum,a_partial), root=0)
+    # if my_rank == 0:
+    #     for rank_proc,psum,part in proc_info:
+    #         print(f"Rank {rank_proc}/{number_of_ranks} for array {part.size}/{a.size} partial sum {psum}")
+    # End of Debug information
 
     if my_rank == 0:
         return total_sum  
@@ -92,6 +93,5 @@ if __name__ == "__main__":
     result = main()
     if result is not None:
         print(f"Sum of array: {result}")
-        print(f"Direct sum of array: {cupy.sum(cupy.arange(10000000))}")
-    execution_time = (timeit.default_timer() - start_time)
-    print(f"Execution time: {execution_time}")
+        execution_time = (timeit.default_timer() - start_time)
+        print(f"Execution time: {execution_time}")

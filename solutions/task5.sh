@@ -2,7 +2,7 @@
 #SBATCH --job-name=task5
 #SBATCH --nodes=1                      # Number of nodes
 #SBATCH --gres=gpu:4                   # Request 4 GPUs per node
-#SBATCH --partition=develbooster       # Partition name
+#SBATCH --partition=booster            # Partition name
 #SBATCH --account=deepacf              # account name
 #SBATCH --output=job_output_task5_%j.log   # Output file (%j is replaced by the job ID)
 #SBATCH --error=job_error_task5_%j.log     # Error file (%j is replaced by the job ID)

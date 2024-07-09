@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=task2            # Job name
-#SBATCH --partition=develbooster    # Partition name
+#SBATCH --partition=booster         # Partition name
 #SBATCH --ntasks=4                  # Number of tasks (MPI ranks)
 #SBATCH --cpus-per-task=64          # Number of CPU cores per task
 #SBATCH --gres=gpu:4                # Number of GPUs

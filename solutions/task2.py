@@ -15,7 +15,7 @@ if __name__ == "__main__":
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size() 
-    print(f"I'm {rank + 1} of {size}.")
+    # print(f"I'm {rank + 1} of {size}.")
 
     if rank == 0:
         start_time = timeit.default_timer()
